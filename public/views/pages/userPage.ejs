@@ -1,0 +1,181 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <%- include('../partials/head'); %>
+</head>
+
+<link rel="stylesheet" type="text/css" href="/css/userPage.css"/>
+
+<style>
+</style>
+
+<body>
+    <header>
+        <%- include('../partials/header'); %>
+    </header>
+
+    <main>
+        <div class="main">
+            <h5 class="text-center">Личный кабинет</h5>
+
+            <div>
+                <ul class="collapsible expandable">
+                    <li>
+                        <div class="collapsible-header text-center">Информация о пользователе</div>
+                        <form class="row change-info-form collapsible-body">
+                            <div class="col s12 l6 input-field">
+                                <input required type="text" minlength="3" name="lastname" />
+                                <label for="lastname">Фамилия*</label>
+                            </div>
+                            <div class="col s12 l6 input-field">
+                                <input required type="text" minlength="3" name="firstname" />
+                                <label for="firstname">Имя*</label>
+                            </div>
+                            <div class="col s12 l6 input-field">
+                                <input type="text" minlength="3" name="patronymic" />
+                                <label for="patronymic">Отчество</label>
+                            </div>
+                            <div class="col s12 l6 input-field">
+                                <input required type="email" id="email" name="email" />
+                                <label for="email">Email*</label>
+                            </div>
+                            <div class="col s12 l6 input-field">
+                                <input pattern="[0-9]{11}" required type="tel" id="phone" name="phone" />
+                                <label for="phone">Телефон*</label>
+                            </div>
+                            <div class="col s12 l6">
+                                <p class="pol-p">Пол*</p>
+                                <label>
+                                    <input class="l3" type="radio" id="male" name="pol" value="М">
+                                    <span>Муж.</span>
+                                </label>
+                                <label>
+                                    <input class="l3" type="radio" id="female" name="pol" value="Жен.">
+                                    <span>Жен.</span>
+                                </label>
+                                <label>
+                                    <input class="l3" type="radio" id="not" name="pol" value="Не указан">
+                                    <span>Не указан</span>
+                                </label>
+                            </div>
+                            <div class="row col s12 l12 btn-center">
+                                <input type="submit" class="btn" value="Сохранить изменения" />
+                            </div>
+            
+                            <p class="req-p">* обязательно для заполнения</p>
+                        </form>
+                    </li>
+            
+            
+                    <li>
+                        <div class="collapsible-header text-center">Изменить пароль</div>
+                        <form class="row change-password-form collapsible-body">
+                            <div class="input-field">
+                                <input type="password" minlength="6" name="oldPassword" />
+                                <label for="oldPassword">Старый пароль</label>
+                            </div>
+                            <div class="input-field">
+                                <input type="password" name="newPassword" />
+                                <label for="oldPassword">Новый пароль</label>
+                            </div>
+                            <div class="input-field">
+                                <input type="password" name="confirmPassword" />
+                                <label for="oldPassword">Подтвердить пароль</label>
+                            </div>
+                            <div class="input-field btn-center">
+                                <input type="submit" class="btn" value="Сохранить пароль">
+                            </div>
+                        </form>
+                    </li>
+                    
+                    
+                    
+                    <li>
+                        <div class="collapsible-header text-center">Чеки</div>
+                        <div class="row change-info-form collapsible-body">
+                            <div class="row">
+                                    <% orders.forEach(function(order){ %>
+                                        <%let allSum=0 %>
+
+                                        <div class="order">
+                                            <div class="numb_ord">
+                                                <span>Номер заказа: </span>
+                                                <span>
+                                                    <%= order.number %>
+                                                </span>
+                                            </div>
+                                            <table class="costs">
+                                                <tr>
+                                                    <th>
+                                                        <p>Наименования товаров</p>
+                                                    </th>
+                                                    <th>
+                                                        <p>Изображения</p>
+                                                    </th>
+                                                    <th>
+                                                        <p>Цена за единицу</p>
+                                                    </th>
+                                                    <th>
+                                                        <p>Количество</p>
+                                                    </th>
+                                                    <th>
+                                                        <p>Общая сумма</p>
+                                                    </th>
+                                                    <th>
+                                                        <p>Статус</p>
+                                                    </th>
+                                                    <th>
+                                                        <p>Дата заказа</p>
+                                                    </th>
+                                                </tr>
+                                                <% order.products.forEach(function(product){ %>
+                                                    <tr>
+                                                        <%- include('../partials/check.ejs', {product:product})%>
+
+                                                        <%allSum +=(product.price*product.count) %>
+                                                    </tr>
+                                                <% }); %>
+                                            </table>
+                                            <div class="info_cost">
+                                                <span class="some_sum">
+                                                    <span>Стоимость заказа: </span>
+                                                    <span class="sums">
+                                                        <%= allSum%>
+                                                    </span>
+                                                </span>
+                                                <span class="some_sum">
+                                                    <span> Стоимость доставки: </span>
+                                                    <span class="sums">
+                                                        <%= order.deliv_cost %>
+                                                    </span>
+                                                </span>
+                                                <span class="some_sum">
+                                                    <span>Общая сумма заказа: </span>
+                                                    <span class="sums">
+                                                        <%= allSum+order.deliv_cost%>
+                                                    </span>
+                                                </span>
+                                            </div>
+                                        </div>
+                                    <% }); %>
+                            </div>
+                        </div>
+                    </li>
+                </ul>
+            </div>
+        </div>
+   </main>
+
+    <footer>
+        <%- include('../partials/footer'); %>
+    </footer>
+
+    <script name="Разворачивающийся список">
+        $(document).ready(function () {
+            $('.collapsible').collapsible();
+        });   
+    </script>
+</body>
+
+</html>

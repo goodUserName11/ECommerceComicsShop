@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <%- include('../partials/head'); %>
+
+    <link rel="stylesheet" type="text/css" href="css/login.css">
+
+    <!-- <style >
+        .auth-page {
+            text-align: center;
+            max-width: 600px;
+            margin: 0 auto;
+            margin-top: 100px;
+        }
+
+        .btn-reg {
+            margin-left: 25px;
+        }
+        .btn{
+            font-family: fantasy;
+        }
+    </style> -->
+</head>
+
+<body>
+    <header>
+        <%- include('../partials/header'); %>
+    </header>
+
+    <main>
+        <div class="container">
+            <div class="auth-page">
+                <!-- <Route path="/auth/login"> -->
+                <h4>Вход</h4>
+                <form class="form form-login">
+                    <div class="row">
+                        <div class="input-field col s12">
+                            <label htmlFor="email">Email</label>
+                            <input type="email" name="email" class="validate" />
+                        </div>
+                        <div class="input-field col s12">
+                            <input type="password" name="password" class="validate" />
+                            <label htmlFor="password">Пароль</label>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <button class="wawes-effect wawes-light btn blue">
+                            Войти
+                        </button>
+                        <a href="/registration" class="btn-outline btn-reg">Зарегистрироваться?</a>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </main>
+
+    <footer>
+        <%- include('../partials/footer'); %>
+    </footer>
+
+</body>
+
+</html>

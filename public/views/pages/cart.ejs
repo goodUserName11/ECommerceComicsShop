@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <%- include('../partials/head'); %>
+
+    <link rel="stylesheet" type="text/css" href="/css/cart.css"/>
+</head>
+
+<body>
+    <%  
+        function getRandomInt(max, min) {
+            return Math.floor(Math.random() * (max - min + 1) + min);
+        }
+
+        let delivery = Number(getRandomInt(3000, 0));
+        let tPrice = delivery;
+    %>
+
+
+    <header>
+        <%- include('../partials/header'); %>
+    </header>
+
+    <main>
+        <div class="main">
+            <h5 class="text-center">Корзина</h5>
+            
+            <div class="row">
+                <div class="col s12 l8">
+                    <table class="table cart-table">
+                        <tr class="table-row">
+                            <th class="table-element">Картинка</th class="table-element">
+                            <th class="table-element">Название</th class="table-element">
+                            <th class="table-element">Количество</th class="table-element">
+                            <th class="table-element">Цена</th class="table-element">
+                            <th class="table-element">Удалить</th class="table-element">
+                        </tr>
+                        <% 
+                            let delbut = 'del';
+                            let id = 0;
+                        %>
+                        <% comics.forEach(function(comic){ %>
+                            <tr id=<%= delbut+id++ %> class="table-row">
+                                <th class="table-element">
+                                    <img class="table-img" src=<%=comic.image %> alt=<% comic.title %> >
+                                </th class="table-element">
+                                <th class="table-element">
+                                    <a class="table-title" href="/product">
+                                        <%= comic.title %>
+                                    </a>
+                                </th class="table-element">
+                                <th class="table-element">
+                                    <input type="number" id="table-count" class="table-count"  min="1" max="100" value="1" />
+                                </th class="table-element">
+                                <th class="table-element">
+                                    <span class="table-price">
+                                        <%= comic.price %>
+                                    </span>
+                                </th class="table-element">
+                                <th class="table-element">
+                                    <a class="table-delete modal-trigger btn lighten-2 red" href="#modalDelete">Удалить</a>
+                                    
+                                    
+                                </th class="table-element">
+                            </tr>
+                
+                            <% tPrice+=comic.price %>
+                                <% }); %>
+                    </table>
+
+                    <!-- Modal Structure -->
+                    <div id="modalDelete" class="modal">
+                        <div class="modal-content">
+                            <!-- <h4>Удалить товар?</h4> -->
+                            <p>Удалить товар?</p>
+                        </div>
+                        <div class="modal-footer">
+                            <a href="#!" class="modal-close table-delete-yes lighten-2 red btn">Да</a>
+                            <a href="#!" class="modal-close btn-flat">Нет</a>
+                        </div>
+                    </div>
+
+                    
+                </div>
+            
+                <div class="total col s8 l2 darken-2 blue">
+                    <h6>Сумма заказа</h6>
+                    <p>Цена доставки: <span id="delivery">
+                            <%= delivery %></span>&nbsp;руб.</p>
+                    <p>Цена итого: <span id="total-price">
+                            <%= tPrice %>
+                        </span>&nbsp;руб.</p>
+                    <a class="btn modal-trigger" href="#modalPay">Оплатить</a>
+
+                    <!-- Modal Structure -->
+                    <div id="modalPay" class="modal modal-fixed-footer">
+                        <div class="modal-content row black-text">
+                            <p class="col s12">ВВедите ваш адрес</p>
+                            <div class="col s12 l6">
+                                <p>Страна</p>
+                                <input required type="text">                                
+                            </div>
+                            <div class="col s12 l6">
+                                <p>Город</p>
+                                <input required type="text">
+                            </div>
+                            <div  class="col s12 l6">
+                                <p>Улица, дом, квартира</p>
+                                <input required type="text">
+                            </div>
+                            <div class="col s12 l6">
+                                <p>Индекс</p>
+                                <input required minlength="6" maxlength="6" type="number">
+                            </div>
+                        </div>
+                        <div class="modal-footer">
+                            <a href="#modalThanks" class="modal-trigger modal-close lighten-1 green btn">ОК</a>
+                            <a href="#!" class="modal-close btn-flat">Отмена</a>
+                        </div>
+                    </div>
+
+                    <!-- Modal Structure -->
+                    <div id="modalThanks" class="modal modal-fixed-footer">
+                        <div class="modal-content row black-text">
+                            <p class="col s12">Спасибо за покупку!</p>
+                            
+                        </div>
+                        <div class="modal-footer row col s12">
+                            <a href="#!" class="modal-close col s12 text-center btn-flat">OK</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+   </main>
+
+    <footer>
+        <%- include('../partials/footer'); %>
+    </footer>
+
+    <script name="модальное окно">
+          document.addEventListener('DOMContentLoaded', function () {
+                var elems = document.querySelectorAll('.modal');
+                var instances = M.Modal.init(elems, {});
+            });
+    </script>
+
+    <script src="/js/cart/countValidation.js"></script>
+    <script src="/js/cart/totalPriceCalculation.js"></script>
+    <script src="/js/cart/deleteRow.js"></script>
+    <script src="/js/cart/addEventsListeners.js"></script>
+</body>
+
+</html>

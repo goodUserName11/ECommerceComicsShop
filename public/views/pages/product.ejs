@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <%- include('../partials/head'); %>
+
+    <link rel="stylesheet" type="text/css" href="css/login.css">
+
+    <style>
+        .container{
+            margin-top: 30px;
+        }
+    
+        .img {
+            width: 100%;
+            height: 100%;
+
+            align-self: center;
+            object-fit: contain;
+        }
+        .admin-btns{
+            margin-top: 10px;;
+        }
+    </style>
+</head>
+
+<body>
+    <header>
+        <%- include('../partials/header'); %>
+    </header>
+
+    <main class="container">
+        <div class="row ">
+            <div class="col s12 m4 l4">
+                <div class="carousel carousel-slider center ">
+                    <div class="carousel-item grey" href="#">
+                        <img class="img"
+                            src="http://pm1.narvii.com/7830/ff21aeb5f66cb9db13c77a648ab503b63c13df30r1-659-1000v2_uhq.jpg">
+                    </div>
+                    <div class="carousel-item grey" href="#">
+                        <img class="img" src="https://cdn.eksmo.ru/v2/ITD000000001126861/COVER/cover1__w820.jpg">
+                    </div>
+                    <div class="carousel-item grey" href="#">
+                        <img class="img" src="https://eksmo.ru/upload/iblock/a89/720_min.jpg">
+                    </div>
+                </div>
+
+                <div class="">
+                    <h6>Цена</h6>
+                    <p>1000 руб.</p>
+                    <button class="btn">Добавить в корзину</button>
+                    <button class="btn pink">Избранное</button>
+                    <!-- <div class="row"> -->
+                    <div class="admin-btns">
+                        <button class="btn darken-2 yellow">Изменить</button>
+                        <button class="btn darken-2 red">Удалить</button>
+                    </div>
+                    <!-- </div> -->
+                </div>
+            </div>
+
+            <div class="col s12 m8 l8">
+                <H5>Название</H5>
+                <h6>Описание</h6>
+                <p>Here be dragons</p>
+            </div>
+        </div>
+        <div class="row">
+            <h6 class="text-center col s12">Похожие товары</h6>
+
+            <div class="similar">
+                <%# карточки товаров < include('../partials/comicsCard') > %>
+            </div>
+        </div>
+    </main>
+
+    <footer>
+        <%- include('../partials/footer'); %>
+    </footer>
+
+    <script>
+        $(document).ready(function () {
+
+            $('.carousel.carousel-slider').carousel({
+                fullWidth: true,
+                indicators: true
+            });
+
+            // setInterval(function() {
+            //     $('.carousel.carousel-slider').carousel('next');
+            // }, 1500);
+        });
+
+    </script>
+</body>
+
+</html>

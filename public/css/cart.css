@@ -1,0 +1,38 @@
+.row{
+    width: 90%;
+    margin: auto;
+}
+.cart-table{
+    margin:auto
+}
+.table-element{
+    width: 1%;
+}
+.table-img{
+    width: 70px;
+    height: 70px;
+    object-fit: contain;
+}
+#table-count{
+    width: 5em;
+}
+.table-title:hover{
+    text-decoration: underline;
+}
+.table-title:active{
+    color:red;
+}
+.table-title {
+    font-weight: lighter;
+}
+.table-delete {
+    font-weight: lighter;
+}
+.total{
+    /* width: 90%; */
+    text-align: center;
+    margin: auto;
+    padding: 50px;
+    color: white;
+    border-radius: 2%;
+}

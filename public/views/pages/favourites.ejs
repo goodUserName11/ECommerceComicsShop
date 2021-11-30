@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <%- include('../partials/head'); %>
+</head>
+
+<body>
+    <header>
+        <%- include('../partials/header'); %>
+    </header>
+
+    <main>
+        <h5 class="text-center">Понравившиеся</h5>
+
+        <div class="container">
+            <div class="row">
+                <% comics.forEach(function(comic){ %>
+                    <%- include('../partials/comicsCard', {comic: comic}); %>
+                <% }); %>
+            </div>
+        </div>
+    </main>
+
+    <footer>
+        <%- include('../partials/footer'); %>
+    </footer>
+
+</body>
+
+</html>

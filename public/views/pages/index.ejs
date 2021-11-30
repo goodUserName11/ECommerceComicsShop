@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <%- include('../partials/head'); %>
+    <link rel="stylesheet" type="text/css" href="css/cards.css">
+
+</head>
+
+<body>
+    <header>
+        <%- include('../partials/header'); %>
+    </header>
+
+    <main>
+        <div class="container">
+            <h6>&nbsp;</h6>
+            <h5 class="text-center">Главная</h5>
+            <h6>&nbsp;</h6>
+
+            <%- include('../partials/banner.ejs') %>
+
+            <nav>
+                <div class="nav-wrapper blue-grey lighten-5">
+                    <form>
+                        <div class="input-field">
+                            <input id="search" type="search" required/>
+                            <label class ="label-icon" htmlFor="search"><i class ="material-icons black-text">search</i></label>
+                            <i class ="material-icons">close</i>
+                        </div>
+                    </form>
+                </div>
+            </nav>
+
+            <h6>&nbsp;</h6>
+            <h6 class="text-center">НОВОЕ И ПОПУЛЯРНОЕ</h6>
+
+
+                <div class="row">
+                    <% comics.forEach(function(comic){ %>
+                        <%- include('../partials/comicsCard', {comic: comic}); %>
+                    <% }); %>
+                </div>
+        </div>
+    </main>
+
+    <footer>
+        <%- include('../partials/footer'); %>
+         
+    </footer>
+
+
+</body>
+
+</html>

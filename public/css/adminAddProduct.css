@@ -1,0 +1,27 @@
+.main {
+    text-align: center;
+    max-width: 600px;
+    margin: 0 auto;
+    margin-bottom: 20px;
+
+}
+
+.row {
+}
+
+textarea {
+    width: 150%;
+    height: 150px;
+    resize: none;
+}
+
+.btns {
+    justify-content: center;
+    margin-top: 20px;
+    width: 100%;
+}
+
+.green {
+    /* align-self: center; */
+    margin-right: 25px;
+}

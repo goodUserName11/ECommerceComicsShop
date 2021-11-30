@@ -1,0 +1,43 @@
+<th>
+    <!-- <p>Наименования товаров</p> -->
+    <a href="/product">
+        <p class="table-title">
+            <%= product.title %>
+        </p>
+    </a>
+</th>
+<th>
+    <!-- <p>Изображения</p> -->
+    <img src=<%=product.img %> class="table-img" alt=<%= product.title %> />
+</th>
+<th>
+    <!-- <p>Цена за единицу</p> -->
+    <span class="table-price">
+        <%= product.price %>
+    </span>
+    <span>руб.</span>
+</th>
+<th>
+    <!-- <p>Количество</p> -->
+    <span class="table-text">
+        <%= product.count %>
+    </span>
+</th>
+<th>
+    <!-- <p>Общая сумма</p> -->
+    <span>
+        <%= product.price*product.count%>
+    </span>
+</th>
+<th>
+    <!-- <p>Статус</p> -->
+    <span class="card-text">
+        <%= product.delivery_status %>
+    </span>
+</th>
+<th>
+    <!-- <p>Дата заказа</p> -->
+    <span class="card-text">
+        <%= product.delivery_date %>
+    </span>
+</th>

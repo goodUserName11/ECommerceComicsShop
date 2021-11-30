@@ -1,0 +1,21 @@
+<div class="col s12 m4 l3">
+    <div class="card large">
+        <div class="card-image">
+            <!-- "http://pm1.narvii.com/7830/ff21aeb5f66cb9db13c77a648ab503b63c13df30r1-659-1000v2_uhq.jpg" -->
+            <img class="image lighten-1 grey" src=<%= comic.image %>
+             alt=<%= comic.title %> />
+        </div>
+        <div class="card-content">
+            <span class="card-title"><%= comic.title %></span>
+            <p><%= comic.price %> руб.</p>
+        </div>
+        <div class="card-action blue-text">
+            <div class="cartBottom black-text">
+                <a href="#!" ><i class="material-icons cart-icon">add_shopping_cart</i></a>
+                <a href="#!" class="favourite"><i class="material-icons fav-icon">favorite_border</i></a>
+            </div>
+            <p></p>
+            <a href="/product">Подробнее...</a>
+        </div>
+    </div>
+</div>
