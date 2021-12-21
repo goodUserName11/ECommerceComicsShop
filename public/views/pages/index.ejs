@@ -9,7 +9,7 @@
 
 <body>
     <header>
-        <%- include('../partials/header'); %>
+        <%- include('../partials/header', {admin, user}); %>
     </header>
 
     <main>
@@ -18,13 +18,14 @@
             <h5 class="text-center">Главная</h5>
             <h6>&nbsp;</h6>
 
-            <%- include('../partials/banner.ejs') %>
+            <%- include('../partials/banner.ejs', {userName}) %>
 
             <nav>
                 <div class="nav-wrapper blue-grey lighten-5">
-                    <form>
+                    <form action="/catalog" method="get">
                         <div class="input-field">
-                            <input id="search" type="search" required/>
+                            <input type="submit" hidden />
+                            <input name="searchQuery" id="search" type="search" >
                             <label class ="label-icon" htmlFor="search"><i class ="material-icons black-text">search</i></label>
                             <i class ="material-icons">close</i>
                         </div>
@@ -33,7 +34,7 @@
             </nav>
 
             <h6>&nbsp;</h6>
-            <h6 class="text-center">НОВОЕ И ПОПУЛЯРНОЕ</h6>
+            <h6 class="text-center">НОВОЕ И НЕОЧЕНЬ</h6>
 
 
                 <div class="row">
@@ -49,7 +50,7 @@
          
     </footer>
 
-
+    <script src="/js/frontLike.js"></script>
 </body>
 
 </html>

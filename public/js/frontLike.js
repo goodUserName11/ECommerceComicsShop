@@ -1,17 +1,31 @@
 function favChange(event) {
     //Текущая иконка
-    let favIconName = event.target.innerText;
-
-    if (favIconName == 'favorite') {
-        event.target.innerText = 'favorite_border';
+    let favIcon = event.target.childNodes[0];
+    if (favIcon.textContent == '\n                         favorite \n                         \n                    ') {
+        favIcon.textContent = 'favorite_border';
     }
     else {
-        event.target.innerText = 'favorite';
+        favIcon.textContent = 'favorite';
     }
 }
 
-let favIcons = document.getElementsByClassName('fav-icon');
+function like(event){
+    this.parentElement.lastElementChild.submit();
+}
 
-for (let i = 0; i < favIcons.length; i++) {
-    favIcons[i].addEventListener('click', favChange);
+let favClickables = document.getElementsByClassName('favourite');
+
+for (let i = 0; i < favClickables.length; i++) {
+    favClickables[i].addEventListener('click', favChange);
+    favClickables[i].addEventListener('click', like);
+}
+
+let cartClickables = document.getElementsByClassName('cartClickables');
+
+function addToCart(event){
+    this.parentElement.children[1].submit();
+}
+
+for (let i = 0; i < cartClickables.length; i++) {
+    cartClickables[i].addEventListener('click', addToCart);
 }

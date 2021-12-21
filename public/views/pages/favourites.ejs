@@ -7,7 +7,7 @@
 
 <body>
     <header>
-        <%- include('../partials/header'); %>
+        <%- include('../partials/header', {user, admin}); %>
     </header>
 
     <main>
@@ -15,8 +15,8 @@
 
         <div class="container">
             <div class="row">
-                <% comics.forEach(function(comic){ %>
-                    <%- include('../partials/comicsCard', {comic: comic}); %>
+                <% userFavouriteProducts.forEach(function(favourtite){ %>
+                    <%- include('../partials/comicsCard', {comic: favourtite}); %>
                 <% }); %>
             </div>
         </div>
@@ -26,6 +26,7 @@
         <%- include('../partials/footer'); %>
     </footer>
 
+    <script src="/js/frontLike.js"></script>
 </body>
 
 </html>

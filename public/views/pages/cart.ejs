@@ -19,7 +19,7 @@
 
 
     <header>
-        <%- include('../partials/header'); %>
+        <%- include('../partials/header', {user, admin}); %>
     </header>
 
     <main>
@@ -33,6 +33,9 @@
                             <th class="table-element">Картинка</th class="table-element">
                             <th class="table-element">Название</th class="table-element">
                             <th class="table-element">Количество</th class="table-element">
+                            <th class="table-element">
+                                Изменить кол-во
+                            </th class="table-element">
                             <th class="table-element">Цена</th class="table-element">
                             <th class="table-element">Удалить</th class="table-element">
                         </tr>
@@ -43,25 +46,32 @@
                         <% comics.forEach(function(comic){ %>
                             <tr id=<%= delbut+id++ %> class="table-row">
                                 <th class="table-element">
-                                    <img class="table-img" src=<%=comic.image %> alt=<% comic.title %> >
+                                    <img class="table-img" src=<%= comic.id_product.pictures[0] %> alt=<% comic.id_product.title %> >
                                 </th class="table-element">
                                 <th class="table-element">
-                                    <a class="table-title" href="/product">
-                                        <%= comic.title %>
+                                    <a class="table-title" href=<%= `/product?productId=${comic.id_product._id}&publisher=${comic.id_product.publisher}` %> >
+                                        <%= comic.id_product.title %>
                                     </a>
                                 </th class="table-element">
                                 <th class="table-element">
-                                    <input type="number" id="table-count" class="table-count"  min="1" max="100" value="1" />
+                                    <form id=<%= `count-form-${comic.id_product._id}` %> action="/basket/updateBasket" method="post">
+                                        <input hidden name="id_product" type="text" value=<%= comic.id_product._id %> />
+                                        <input name="count" type="number" id="table-count" class="table-count"  min="1" max="1000" value=<%= comic.count %> />
+                                    </form>
+                                </th class="table-element">
+                                <th class="table-element">
+                                    <button form=<%= `count-form-${comic.id_product._id}` %> class="btn">
+                                        Сохранить
+                                    </button>
                                 </th class="table-element">
                                 <th class="table-element">
                                     <span class="table-price">
-                                        <%= comic.price %>
+                                        <%= comic.id_product.price %>
                                     </span>
                                 </th class="table-element">
                                 <th class="table-element">
                                     <a class="table-delete modal-trigger btn lighten-2 red" href="#modalDelete">Удалить</a>
-                                    
-                                    
+                                    <input hidden type="text" value=<%= comic.id_product._id %> >                                    
                                 </th class="table-element">
                             </tr>
                 
@@ -76,7 +86,10 @@
                             <p>Удалить товар?</p>
                         </div>
                         <div class="modal-footer">
-                            <a href="#!" class="modal-close table-delete-yes lighten-2 red btn">Да</a>
+                            <form hidden id="delete-modal-form" action="/basket/deleteElBasket" method="post">
+                                <input hidden id="delete-modal-input" type="text" name="id_product">
+                            </form>
+                            <button form="delete-modal-form" href="#!" class="modal-close table-delete-yes lighten-2 red btn">Да</button>
                             <a href="#!" class="modal-close btn-flat">Нет</a>
                         </div>
                     </div>
@@ -91,34 +104,37 @@
                     <p>Цена итого: <span id="total-price">
                             <%= tPrice %>
                         </span>&nbsp;руб.</p>
-                    <a class="btn modal-trigger" href="#modalPay">Оплатить</a>
+                    <a id="pay-btn" class="btn modal-trigger" href="#modalPay">Оплатить</a>
 
                     <!-- Modal Structure -->
+                    <form id="new-order-form" action="/basket/deleteBasket" method="post">
                     <div id="modalPay" class="modal modal-fixed-footer">
                         <div class="modal-content row black-text">
-                            <p class="col s12">ВВедите ваш адрес</p>
-                            <div class="col s12 l6">
-                                <p>Страна</p>
-                                <input required type="text">                                
-                            </div>
-                            <div class="col s12 l6">
-                                <p>Город</p>
-                                <input required type="text">
-                            </div>
-                            <div  class="col s12 l6">
-                                <p>Улица, дом, квартира</p>
-                                <input required type="text">
-                            </div>
-                            <div class="col s12 l6">
-                                <p>Индекс</p>
-                                <input required minlength="6" maxlength="6" type="number">
-                            </div>
+                                <input hidden name="deliveryCost" type="number" id="new-order-input" value=<%= delivery %>>
+                                <p class="col s12">ВВедите ваш адрес</p>
+                                <div class="col s12 l6">
+                                    <p>Страна</p>
+                                    <input class="validate" name="country" required type="text">
+                                </div>
+                                <div class="col s12 l6">
+                                    <p>Город</p>
+                                    <input class="validate" name="city" required type="text">
+                                </div>
+                                <div class="col s12 l6">
+                                    <p>Улица, дом, квартира</p>
+                                    <input class="validate" name="adress" required type="text">
+                                </div>
+                                <div class="col s12 l6">
+                                    <p>Индекс</p>
+                                    <input class="validate" name="index" required pattern="[0-9]{6}" minlength="6" maxlength="6" type="text">
+                                </div>
                         </div>
                         <div class="modal-footer">
-                            <a href="#modalThanks" class="modal-trigger modal-close lighten-1 green btn">ОК</a>
+                            <button type="submit"  class="modal-trigger modal-close lighten-1 green btn">ОК</button>
                             <a href="#!" class="modal-close btn-flat">Отмена</a>
                         </div>
                     </div>
+                    </form>
 
                     <!-- Modal Structure -->
                     <div id="modalThanks" class="modal modal-fixed-footer">

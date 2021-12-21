@@ -11,26 +11,26 @@
 
 <body>
     <header>
-        <%- include('../partials/header'); %>
+        <%- include('../partials/header', {user, admin}); %>
     </header>
 
     <main>
         <div class="container">
             <div class="auth-page">
                 <h4>Регистрация</h4>
-                <form class="form form-login">
+                <form action="/user/create" method="post" class="form form-login">
                     <div class="row">
                         <div class="input-field col s12">
                             <label htmlFor="email">Email</label>
-                            <input type="email" name="email" class="validate" />
+                            <input type="email" name="email" class="validate" required />
                         </div>
                         <div class="input-field col s12">
-                            <input type="password" name="password" class="validate" />
+                            <input type="password" name="password" class="validate" required />
                             <label htmlFor="password">Пароль</label>
                         </div>
                     </div>
                     <div class="row">
-                        <button class="wawes-effect wawes-light btn blue" >
+                        <button type="submit" class="wawes-effect wawes-light btn blue" >
                             Регистрация
                         </button>
                         <a href="/login" class="btn-outline btn-reg">Войти?</a>

@@ -26,7 +26,7 @@
 
 <body>
     <header>
-        <%- include('../partials/header'); %>
+        <%- include('../partials/header', {admin, user}); %>
     </header>
 
     <main>
@@ -34,19 +34,19 @@
             <div class="auth-page">
                 <!-- <Route path="/auth/login"> -->
                 <h4>Вход</h4>
-                <form class="form form-login">
+                <form action="/user/login" method="post" class="form form-login" >
                     <div class="row">
                         <div class="input-field col s12">
                             <label htmlFor="email">Email</label>
-                            <input type="email" name="email" class="validate" />
+                            <input type="email" name="email" class="validate" required />
                         </div>
                         <div class="input-field col s12">
-                            <input type="password" name="password" class="validate" />
+                            <input type="password" name="password" class="validate" required />
                             <label htmlFor="password">Пароль</label>
                         </div>
                     </div>
                     <div class="row">
-                        <button class="wawes-effect wawes-light btn blue">
+                        <button type="submit" class="wawes-effect wawes-light btn blue">
                             Войти
                         </button>
                         <a href="/registration" class="btn-outline btn-reg">Зарегистрироваться?</a>

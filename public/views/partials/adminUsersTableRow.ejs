@@ -1,0 +1,64 @@
+<th>
+    <!-- <p>Email</p> -->
+    <span class="rows table-email">
+        <%= user.email %>
+    </span>
+</th>
+<th>
+    <!-- <p>Имя</p> -->
+    <span class="rows table-name">
+        <%= user.name %>
+    </span>
+</th>
+<th>
+    <!-- <p>Фамилия</p> -->
+    <span class="rows table-surname">
+        <%= user.surname %>
+    </span>
+</th>
+<th>
+    <!-- <p>Отчество</p> -->
+    <span class="rows table-patronymic">
+        <%= user.patronymic %>
+    </span>
+</th>
+<th>
+    <!-- <p>Телефон</p> -->
+    <span class="rows table-phone">
+        <%= user.phone%>
+    </span>
+</th>
+<th>
+    <!-- <p>Пол</p> -->
+    <span class="rows table-gender">
+        <% if(user.gender === 'Male') { %>
+            Муж.
+        <% } else if(user.gender === 'Female'){ %>
+            Жен.
+        <% } else { %> 
+            Не указан
+        <% } %>  
+    </span>
+</th>
+<th class="table-ordersCount">
+    <!-- <p>Кол-во заказов</p> -->
+    <span class="rows table-ordersCount">
+        <%= user.ordersCount %>
+    </span>
+</th>
+<th>
+    <!-- <p>Админ?</p> -->
+    <span class="rows table-admin">
+        <%if(user.isAdmin){ %>
+            Да
+        <% } else { %>
+            Нет
+        <% } %>  
+    </span>
+</th>
+<th>
+    <!-- <p>Админ?</p> -->
+    <a class="rows table-change" href=<%= `/user/updateAdmin?userId=${user._id}` %> >
+        Изменить
+    </a>
+</th>

@@ -7,7 +7,7 @@ const orderSchema = new Schema({
     userId: {type: Schema.Types.ObjectId, ref: 'User'},
     deliveryCost: Number,
     sum: Number,
-    date: String,
+    date: Date,
     status: String,
     adress: String,
     city: String,

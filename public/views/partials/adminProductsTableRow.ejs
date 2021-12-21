@@ -1,0 +1,38 @@
+<th>
+    <a href=<%= `/product?productId=${product._id}&publisher=${product.publisher}` %>  class="rows table-title">
+        <%= product.title %>
+    </a>
+</th>
+<th>
+    <img src=<%= product.pictures[0] %> class="table-img" alt=<%= product.title %> />
+</th>
+<th class="table-price">
+    <span class="rows">
+        <%= product.price %>
+    </span>
+</th>
+<th>
+    <span class="rows table-coverType">
+        <%= product.coverType %>
+    </span>
+</th>
+<th>
+    <span class="rows table-publisher">
+        <%= product.publisher %>
+    </span>
+</th>
+<th class="table-count">
+    <span class="rows ">
+        <%= product.count %>
+    </span>
+</th>
+<th class="table-ordersCount">
+    <span class="rows">
+        <%= product.ordersCount %>
+    </span>
+</th>
+<th>
+    <a class="rows table-change" href=<%= `/adminEditProduct?productId=${product._id}`  %>>
+        Изменить
+    </a>
+</th>

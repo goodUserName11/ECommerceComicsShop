@@ -15,3 +15,4 @@ function totalPriceCalculation(event) {
     totalPriceEl.innerHTML = totalPrice;
 }
 
+totalPriceCalculation();

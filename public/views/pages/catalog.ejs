@@ -12,21 +12,30 @@
 
 <bodys>
     <header>
-        <%- include('../partials/header'); %>
+        <%- include('../partials/header', {user, admin}); %>
     </header>
 
     <main>
         <div class="container">
             <h5>&nbsp;</h5>
             <h5 class="text-center">КАТАЛОГ</h5>
+            <h6 class="text-center">
+                <% if(publisher) { %>
+                    <%= publisher %>
+                <% } else { %>
+                    Все
+                <% } %>     
+            </h6>
 
             <h6>&nbsp;</h6>
 
             <nav>
                 <div class="nav-wrapper blue-grey lighten-5">
-                    <form>
+                    <form action="/catalog" method="get">
                         <div class="input-field">
-                            <input id="search" type="search" required />
+                            <input type="submit" hidden />
+                            <input hidden name="publisher" value=<%= publisher %> >
+                            <input name="searchQuery" id="search" type="search" <% if(prevSearchQuery) { %> value=<%= prevSearchQuery %> <% } %> >
                             <label class="label-icon" htmlFor="search"><i class="material-icons black-text">search</i></label>
                             <i class="material-icons">close</i>
                         </div>

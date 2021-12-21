@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <%- include('../partials/head'); %>
+
+    <link rel="stylesheet" type="text/css" href="/css/adminAddProduct.css"/>
+
+    <style>
+        .main {
+            margin: 0 auto;
+        }
+        .rows {
+            font-weight: 100;
+        }
+        /* .table-ordersCount,.table-count,.table-price{
+                text-align: right;
+                margin-right: 10px;
+        } */
+        .table-change:hover {
+            text-decoration: underline;
+        }
+        .table-change:active {
+            color: red;
+        }
+        .table-img {
+            width: 70px;
+            height: 70px;
+            object-fit: contain;
+        }
+        th.table-title-head{
+            width:10%;
+        }
+    </style>
+</head>
+
+<bodys>
+    <header>
+        <%- include('../partials/header'); %>
+    </header>
+
+    <main class="container">
+        <h5 class="text-center">Товары</h5>
+        <div class="row">
+            <table class="products highlight responsive-table">
+                <thead>
+                    <tr>
+                        <th class="table-title-head">
+                            <p>Название</p>
+                        </th>
+                        <th>
+                            <p>Изображение</p>
+                        </th>
+                        <th>
+                            <p>Цена</p>
+                        </th>
+                        <th>
+                            <p>Тип обложки</p>
+                        </th>
+                        <th>
+                            <p>Издатель</p>
+                        </th>
+                        <th>
+                            <p>Количество</p>
+                        </th>
+                        <th class="">
+                            <p>Кол-во заказов</p>
+                        </th>
+                        <th>
+                            <p>Изменить товар</p>
+                        </th>
+                    </tr>
+                </thead>
+                <% products.forEach(function(product){ %>
+                    <tr class="rows">
+                        <%- include('../partials/adminProductsTableRow.ejs', {product:product})%>
+                    </tr>
+                <% }); %>
+            </table>
+        </div>
+    </main>
+
+    <footer>
+        <%- include('../partials/footer'); %>
+    </footer>
+
+    <script>
+
+    </script>
+</body>
+
+</html>

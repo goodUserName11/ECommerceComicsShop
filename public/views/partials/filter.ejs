@@ -2,60 +2,39 @@
     <li>
         <div class="collapsible-header text-center">Фильтры</div>
         <div class="collapsible-body">
-            <div class="">
-                <div class="">Цена, руб.</div>
-                <div class="input-field inline">
-                    <input data-meta-name="FilterPriceGroup__input-min" name="input-min" class=""
-                        autocomplete="off" type="numeric" pattern="[0-9 ]*" value="28 314">
-                    <span class="">-</span>
-                    <input data-meta-name="FilterPriceGroup__input-max" name="input-max" class=""
-                        autocomplete="off" type="numeric" pattern="[0-9 ]*" value="73 400">
+            <form action="#">
+                <div class="">
+                    <div class="">Цена, руб.</div>
+                    <div class="input-field inline">
+                        <input data-meta-name="FilterPriceGroup__input-min" name="input-min" class="" autocomplete="off"
+                            type="numeric" pattern="[0-9 ]*" value="1">
+                        <span class="">-</span>
+                        <input data-meta-name="FilterPriceGroup__input-max" name="input-max" class="" autocomplete="off"
+                            type="numeric" pattern="[0-9 ]*" value="10000">
+                    </div>
                 </div>
-            </div>
-
-            <form action="#">
-                <p>Издательства</p>
-                <ul>
-                    <li>
-                        <label>
-                            <input type="checkbox" class="filled-in" />
-                            <span>Marvel</span>
-                        </label>
-                    </li>
-                    <li>
-                        <label>
-                            <input type="checkbox" class="filled-in" />
-                            <span>DC</span>
-                        </label>
-                    </li>
-                    <li>
-                        <label>
-                            <input type="checkbox" class="filled-in" />
-                            <span>Другое</span>
-                        </label>
-                    </li>
-                </ul>
+        
+                <div>
+                    <p>Переплет</p>
+                    <ul>
+                        <li>
+                            <label>
+                                <input type="checkbox" class="filled-in" />
+                                <span>Твердый</span>
+                            </label>
+                        </li>
+                        <li>
+                            <label>
+                                <input type="checkbox" class="filled-in" />
+                                <span>Мягкий</span>
+                            </label>
+                        </li>
+                    </ul>
+                </div>
+        
+                <button type="reset" class="btn-outline btn">Сбросить</button>
             </form>
 
-            <form action="#">
-                <p>Переплет</p>
-                <ul>
-                    <li>
-                        <label>
-                            <input type="checkbox" class="filled-in" />
-                            <span>Твердый</span>
-                        </label>
-                    </li>
-                    <li>
-                        <label>
-                            <input type="checkbox" class="filled-in" />
-                            <span>Мягкий</span>
-                        </label>
-                    </li>
-                </ul>
-            </form>
-
-            <button class="btn-outline btn">Сбросить</button>
         </div>
     </li>
 </ul>

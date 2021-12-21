@@ -27,50 +27,76 @@
 
 <body>
     <header>
-        <%- include('../partials/header'); %>
+        <%- include('../partials/header', {admin, user}); %>
     </header>
-
+    
     <main class="container">
         <div class="row ">
             <div class="col s12 m4 l4">
                 <div class="carousel carousel-slider center ">
+                    <% product.pictures.forEach(picture => {%>
                     <div class="carousel-item grey" href="#">
                         <img class="img"
-                            src="http://pm1.narvii.com/7830/ff21aeb5f66cb9db13c77a648ab503b63c13df30r1-659-1000v2_uhq.jpg">
+                            src=<%= picture %> />
                     </div>
-                    <div class="carousel-item grey" href="#">
-                        <img class="img" src="https://cdn.eksmo.ru/v2/ITD000000001126861/COVER/cover1__w820.jpg">
-                    </div>
-                    <div class="carousel-item grey" href="#">
-                        <img class="img" src="https://eksmo.ru/upload/iblock/a89/720_min.jpg">
-                    </div>
+                    <% }); %>
                 </div>
 
                 <div class="">
+                    <h6>Издатель</h6>
+                    <p><%= product.publisher %></p>
+                    <h6>Тип обложки</h6>
+                    <p><%= product.coverType %></p>
                     <h6>Цена</h6>
-                    <p>1000 руб.</p>
-                    <button class="btn">Добавить в корзину</button>
-                    <button class="btn pink">Избранное</button>
-                    <!-- <div class="row"> -->
-                    <div class="admin-btns">
-                        <button class="btn darken-2 yellow">Изменить</button>
-                        <button class="btn darken-2 red">Удалить</button>
+                    <p><%= product.price %> руб.</p>
+                    <div>
+                        <form hidden id="basket-form" action="/basket/addBasket" method="post">
+                            <input hidden  type="text" name="id_product" value=<%= product._id %> />
+                        </form>
+                        <% if(product.items.length > 0) {%> 
+                        <button form="basket-form" class="btn">Добавить в корзину</button>
+                        <% } else {%>
+                        <button class="btn grey">Нет в наличии</button>
+                        <% } %> 
+                        <button class="btn pink favourite"><i class="material-icons fav-icon">
+                            <% if(!product.isLiked){ %> <%= 'favorite_border' %>
+                            <%} else{ %> <%= 'favorite' %><% } %> 
+                        </i></button>
+                        <form hidden action="/favourite/createDeleteFavourite" method="post">
+                            <input hidden  type="text" name="productId" value=<%= product._id %> />
+                        </form>
                     </div>
+                    <!-- <div class="row"> -->
+                    <% if(admin){ %> 
+                    <div class="admin-btns">
+                        
+                        <a href=<%= `/adminEditProduct?productId=${product._id}` %> class="btn darken-2 yellow">Изменить</a>
+
+                        <button form="delete-form" class="btn darken-2 red" id="delete-btn">Удалить</button>
+                        <form id="delete-form" hidden action="/favourite/" method="post">
+                            <input hidden  type="text" name="productId" value=<%= product._id %> />
+                        </form>
+                    </div>
+                    <% } %> 
                     <!-- </div> -->
                 </div>
             </div>
 
             <div class="col s12 m8 l8">
                 <H5>Название</H5>
+                <p><%= product.title %></p>
                 <h6>Описание</h6>
-                <p>Here be dragons</p>
+                <p><%= product.description %></p>
             </div>
         </div>
         <div class="row">
             <h6 class="text-center col s12">Похожие товары</h6>
 
             <div class="similar">
-                <%# карточки товаров < include('../partials/comicsCard') > %>
+                
+                <% similar.forEach(function(comic){ %>
+                    <%- include('../partials/comicsCard', {comic: comic}); %>
+                <% }); %>
             </div>
         </div>
     </main>
@@ -93,6 +119,8 @@
         });
 
     </script>
+
+    <script src="/js/frontLike.js"></script>
 </body>
 
 </html>

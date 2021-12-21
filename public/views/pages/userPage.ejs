@@ -12,7 +12,7 @@
 
 <body>
     <header>
-        <%- include('../partials/header'); %>
+        <%- include('../partials/header', {user, admin}); %>
     </header>
 
     <main>
@@ -21,41 +21,41 @@
 
             <div>
                 <ul class="collapsible expandable">
-                    <li>
+                    <li class="active">
                         <div class="collapsible-header text-center">Информация о пользователе</div>
-                        <form class="row change-info-form collapsible-body">
+                        <form action="/user/updateInfo" method="post"  class="row change-info-form collapsible-body">
                             <div class="col s12 l6 input-field">
-                                <input required type="text" minlength="3" name="lastname" />
+                                <input required type="text" minlength="3" name="surname" class="validate" value=<%= userInfo.surname %>  >
                                 <label for="lastname">Фамилия*</label>
                             </div>
                             <div class="col s12 l6 input-field">
-                                <input required type="text" minlength="3" name="firstname" />
+                                <input required type="text" minlength="3" name="name" class="validate" value=<%= userInfo.name %> >
                                 <label for="firstname">Имя*</label>
                             </div>
                             <div class="col s12 l6 input-field">
-                                <input type="text" minlength="3" name="patronymic" />
+                                <input type="text" minlength="3" name="patronymic" class="validate" value=<%= userInfo.patronymic %> >
                                 <label for="patronymic">Отчество</label>
                             </div>
                             <div class="col s12 l6 input-field">
-                                <input required type="email" id="email" name="email" />
+                                <input required type="email" id="email" name="email" class="validate" value=<%= userInfo.email %> >
                                 <label for="email">Email*</label>
                             </div>
                             <div class="col s12 l6 input-field">
-                                <input pattern="[0-9]{11}" required type="tel" id="phone" name="phone" />
+                                <input pattern="[0-9]{11}" required type="tel" id="phone" class="validate" name="phone" value=<%= userInfo.phone %> >
                                 <label for="phone">Телефон*</label>
                             </div>
                             <div class="col s12 l6">
                                 <p class="pol-p">Пол*</p>
                                 <label>
-                                    <input class="l3" type="radio" id="male" name="pol" value="М">
+                                    <input class="l3" type="radio" required id="male" name="gender" value="Male" <% if(userInfo.gender === 'Male') { %> checked <% } %>>
                                     <span>Муж.</span>
                                 </label>
                                 <label>
-                                    <input class="l3" type="radio" id="female" name="pol" value="Жен.">
+                                    <input class="l3" type="radio" required id="female" name="gender" value="Female" <%if(userInfo.gender === 'Female') { %> checked <% } %>>
                                     <span>Жен.</span>
                                 </label>
                                 <label>
-                                    <input class="l3" type="radio" id="not" name="pol" value="Не указан">
+                                    <input class="l3" type="radio" required id="not" name="gender" value="not" <% if(userInfo.gender !== 'Female' && userInfo.gender !== 'Male') {%> checked <% } %> >
                                     <span>Не указан</span>
                                 </label>
                             </div>
@@ -70,21 +70,21 @@
             
                     <li>
                         <div class="collapsible-header text-center">Изменить пароль</div>
-                        <form class="row change-password-form collapsible-body">
+                        <form id="changePasswordForm" action="" method="post" class="row change-password-form collapsible-body">
                             <div class="input-field">
-                                <input type="password" minlength="6" name="oldPassword" />
+                                <input type="text" id="oldPassword" class="validate" name="oldPassword"/>
                                 <label for="oldPassword">Старый пароль</label>
                             </div>
                             <div class="input-field">
-                                <input type="password" name="newPassword" />
+                                <input type="password" minlength="6" id="newPassword" class="validate" name="newPassword" required />
                                 <label for="oldPassword">Новый пароль</label>
                             </div>
                             <div class="input-field">
-                                <input type="password" name="confirmPassword" />
+                                <input type="password" name="confirmPassword" class="validate" id="confirmPassword" required />
                                 <label for="oldPassword">Подтвердить пароль</label>
                             </div>
                             <div class="input-field btn-center">
-                                <input type="submit" class="btn" value="Сохранить пароль">
+                                <input type="button" class="btn" id="save-pass" value="Сохранить пароль">
                             </div>
                         </form>
                     </li>
@@ -92,17 +92,15 @@
                     
                     
                     <li>
-                        <div class="collapsible-header text-center">Чеки</div>
+                        <div class="collapsible-header text-center">Покупки</div>
                         <div class="row change-info-form collapsible-body">
                             <div class="row">
                                     <% orders.forEach(function(order){ %>
-                                        <%let allSum=0 %>
-
                                         <div class="order">
                                             <div class="numb_ord">
                                                 <span>Номер заказа: </span>
                                                 <span>
-                                                    <%= order.number %>
+                                                    <%= order._id %>
                                                 </span>
                                             </div>
                                             <table class="costs">
@@ -120,20 +118,12 @@
                                                         <p>Количество</p>
                                                     </th>
                                                     <th>
-                                                        <p>Общая сумма</p>
-                                                    </th>
-                                                    <th>
-                                                        <p>Статус</p>
-                                                    </th>
-                                                    <th>
-                                                        <p>Дата заказа</p>
+                                                        <p>Сумма</p>
                                                     </th>
                                                 </tr>
                                                 <% order.products.forEach(function(product){ %>
                                                     <tr>
                                                         <%- include('../partials/check.ejs', {product:product})%>
-
-                                                        <%allSum +=(product.price*product.count) %>
                                                     </tr>
                                                 <% }); %>
                                             </table>
@@ -141,19 +131,35 @@
                                                 <span class="some_sum">
                                                     <span>Стоимость заказа: </span>
                                                     <span class="sums">
-                                                        <%= allSum%>
+                                                        <%= order.sum %>
+                                                        ; &nbsp;&nbsp;
                                                     </span>
                                                 </span>
                                                 <span class="some_sum">
                                                     <span> Стоимость доставки: </span>
                                                     <span class="sums">
-                                                        <%= order.deliv_cost %>
+                                                        <%= order.deliveryCost %>
+                                                        ; &nbsp;&nbsp;
                                                     </span>
                                                 </span>
                                                 <span class="some_sum">
                                                     <span>Общая сумма заказа: </span>
                                                     <span class="sums">
-                                                        <%= allSum+order.deliv_cost%>
+                                                        <%= order.sum + order.deliveryCost %>
+                                                        ; &nbsp;&nbsp;
+                                                    </span>
+                                                </span>
+                                                <span class="some_status">
+                                                    <span>Статус: </span>
+                                                    <span class="status">
+                                                        <%= order.status %>
+                                                        ; &nbsp;&nbsp;
+                                                    </span>
+                                                </span>
+                                                <span class="some_date">
+                                                    <span>Дата: </span>
+                                                    <span class="date">
+                                                        <%= order.date.toLocaleDateString('ru')%>
                                                     </span>
                                                 </span>
                                             </div>
@@ -175,6 +181,26 @@
         $(document).ready(function () {
             $('.collapsible').collapsible();
         });   
+    </script>
+
+    <script >
+        let newPass = document.getElementById('newPassword').value;
+        let confPass = document.getElementById('confirmPassword').value;
+        let passForm = document.getElementById('changePasswordForm');
+        let savePassBtn = document.getElementById('save-pass');
+
+        function savePass(e){
+            if(newPass === confPass){
+                console.log('1111');
+
+                passForm.submit();
+            }
+            else{
+                alert("Пароли не совпадают!");
+            }
+        }
+
+        savePassBtn.addEventListener('onclick', savePass);
     </script>
 </body>
 

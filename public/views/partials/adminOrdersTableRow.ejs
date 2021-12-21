@@ -1,0 +1,79 @@
+<td>
+    <span class="rows table-number">
+        <%
+            let a = order._id.toString();
+            a = a.slice(0, 7) + " " + a.slice(7);
+            a = a.slice(0,16) + ' ' + a.slice(16);
+        %>
+        <%= a %>
+    </span>
+</td>
+<td class="table-email">
+    <span class="rows">
+        <%= order.userId.email %>
+    </span>
+</td>
+<td>
+    <table class="rows table-title">
+        <% order.products.forEach(product => {  %>
+            <tr><td>
+            <%= product.productId.title %>
+        </td></tr>
+        <% }); %> 
+    </table>
+</td>
+<td class="table-price">
+    <table class="rows table-price">
+        <% order.products.forEach(product => {  %>
+            <tr><td>
+            <%= product.productId.price %>
+        </td></tr>
+        <% }); %> 
+    </table>
+</td>
+<td class="table-count">
+    <table class="rows table-count">
+        <% order.products.forEach(product => {  %>
+            <tr><td>
+            <%= product.count %>
+        </td></tr>
+        <% }); %> 
+    </table>
+</td>
+<td class="table-deliveryCost">
+    <span class="rows">
+        <%= order.deliveryCost %>
+    </span>
+</td>
+<td class="table-sum">
+    <span class="rows">
+        <%= order.sum + order.deliveryCost %>
+    </span>
+</td>
+<td class="table-status">
+    <% if (order.status == 'Доставлено') { %> <span class="rows">Доставлено</span> <% }  else {%> 
+        <form id="status-form" action="/order/update" method="post">
+            <input hidden type="text" name="_id" value=<%= order._id %> >
+            <select class="rows" name="status">
+                <option value="Доставлено">Доставлено</option>
+                <option <% if (order.status=='Сборка' ) { %> selected<% } %> value="Сборка">Сборка</option>
+                <option <% if (order.status=='Отправлено' ) { %> selected<% } %> value="Отправлено">Отправлено</option>
+            </select>
+        </form>
+    <% } %>
+</td>
+<td class="table-date">
+    <span class="rows">
+        <%= order.date.toLocaleDateString('ru') %>
+    </span>
+</td>
+<td class="table-adress">
+    <span class="rows">
+        <%= `${order.country}, ${order.city}, ${order.adress}, ${order.index}`  %>
+    </span>
+</td>
+<td class="table-save">
+    <button class="btn rows" form="status-form">
+        Сохр.
+    </button>
+</td>

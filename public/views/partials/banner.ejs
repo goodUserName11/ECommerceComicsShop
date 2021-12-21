@@ -2,11 +2,12 @@
     <div class="col s12 m12">
       <div class="card blue lighten-1">
         <div class="card-content white-text">
-          <span class="card-title">Добро пожаловать к нам!</span>
+          <% if(!userName){ userName='Гость' } %> 
+          <span class="card-title"><%=  `Добро пожаловать к нам, ${userName}!` %></span>
           <p>Здесь продаются комиксы... и все. Какие именно можно посмотреть в нашем каталоге.</p>
         </div>
         <div class="card-action">
-          <a href="#">Каталог</a>
+          <a href="/catalog">Каталог</a>
         </div>
       </div>
     </div>

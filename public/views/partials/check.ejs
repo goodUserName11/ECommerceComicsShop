@@ -1,19 +1,19 @@
 <th>
     <!-- <p>Наименования товаров</p> -->
-    <a href="/product">
+    <a href=<%= `/product?productId=${product.productId._id}&publisher=${product.productId.publisher}` %>>
         <p class="table-title">
-            <%= product.title %>
+            <%= product.productId.title %>
         </p>
     </a>
 </th>
 <th>
     <!-- <p>Изображения</p> -->
-    <img src=<%=product.img %> class="table-img" alt=<%= product.title %> />
+    <img src=<%=product.productId.pictures[0] %> class="table-img" alt=<%= product.productId.title %> />
 </th>
 <th>
     <!-- <p>Цена за единицу</p> -->
     <span class="table-price">
-        <%= product.price %>
+        <%= product.productId.price %>
     </span>
     <span>руб.</span>
 </th>
@@ -26,18 +26,6 @@
 <th>
     <!-- <p>Общая сумма</p> -->
     <span>
-        <%= product.price*product.count%>
-    </span>
-</th>
-<th>
-    <!-- <p>Статус</p> -->
-    <span class="card-text">
-        <%= product.delivery_status %>
-    </span>
-</th>
-<th>
-    <!-- <p>Дата заказа</p> -->
-    <span class="card-text">
-        <%= product.delivery_date %>
+        <%= product.productId.price*product.count%>
     </span>
 </th>

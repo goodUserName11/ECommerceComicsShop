@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <%- include('../partials/head'); %>
+
+    <link rel="stylesheet" type="text/css" href="/css/adminAddProduct.css"/>
+
+    <style>
+        .main{
+            margin: 0 auto;
+        }
+        .rows {
+            font-weight: 100;
+        }
+        /* .table-ordersCount,.table-count,.table-price{
+                text-align: right;
+                margin-right: 10px;
+        } */
+        .table-change:hover {
+            text-decoration: underline;
+        }
+        .table-change:active {
+            color: red;
+        }
+        th.table-title-head, .table-number{
+            width:10%;
+        }
+        select{
+            display: flex;
+        }
+    </style>
+</head>
+
+<bodys>
+    <header>
+        <%- include('../partials/header'); %>
+    </header>
+
+    <main class="container">
+        <h5 class="text-center">Покупки</h5>
+        <div class="row">
+            <table class="orders highlight responsive-table">
+                <thead>
+                    <tr>
+                        <th class="table-title-head">
+                            <p>Номер заказа</p>
+                        </th>
+                        <th>
+                            <p>Пользователь</p>
+                        </th>
+                        <th class="table-title-head">
+                            <p>Товары</p>
+                        </th>
+                        <th>
+                            <p>Цена</p>
+                        </th>
+                        <th>
+                            <p>Кол-во</p>
+                        </th>
+                        <th>
+                            <p>Доставка</p>
+                        </th>
+                        <th>
+                            <p>Сумма с доставкой</p>
+                        </th>
+                        <th>
+                            <p>Статус</p>
+                        </th>
+                        <th>
+                            <p>Дата</p>
+                        </th>
+                        <th class="table-title-head">
+                            <p>Адрес</p>
+                        </th>
+                        <th class="table-title-head">
+                            <p>Сохранить</p>
+                        </th>
+                    </tr>
+                </thead>
+                <% orders.forEach(function(order){ %>
+                    <tr class="rows">
+                        <%- include('../partials/adminOrdersTableRow.ejs', {order:order})%>
+                    </tr>
+                <% }); %>
+            </table>
+        </div>
+    </main>
+
+    <footer>
+        <%- include('../partials/footer'); %>
+    </footer>
+
+    <script>
+
+    </script>
+</body>
+
+</html>

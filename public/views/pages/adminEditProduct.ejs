@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <%- include('../partials/head'); %>
+
+    <link rel="stylesheet" type="text/css" href="/css/adminAddProduct.css"/>
+
+    <style>
+        .main{
+            margin: 0 auto;
+            text-align: center;
+            margin: 0 auto;
+        }
+        .btns{
+            text-align: center;
+            margin:0 auto;
+        }
+        select{
+            display: flex;
+        }
+        .pics{
+            /* margin: auto; */
+            justify-content: center;
+            align-self: center;
+            /* margin: auto; */
+            text-align: center;
+            padding: auto;
+        }
+    </style>
+</head>
+
+<bodys>
+    <header>
+        <%- include('../partials/header'); %>
+    </header>
+
+    <main class="container">
+        <div class="main">
+            <h5 class="text-center">Добавить товар</h5>
+            <div class="row">
+                <form action="/product/update" method="post" class="col s12">
+                    <div class="row">
+                        <div class="input-field col s8">
+                            <input required hidden name="_id" type="text"value=<%= product._id %> >
+                            <input required name="title" minlength="3" id="name" type="text" class="validate" value=<%- '"' + product.title + '"' %> >
+                            <label for="name">Название</label>
+                        </div>
+                        <div class="input-field col s4">
+                            <input required name="price" id="price" type="number" min="1" class="validate" value=<%= product.price %> >
+                            <label for="price">Цена, руб.</label>
+                        </div>
+                        <div class="col s6">
+                            <select name="coverType" required class="input-field">
+                                <option disabled selected>Выберите тип переплета</option>
+                                <option value="Твердый" <% if(product.coverType === "Твердый"){ %> selected <% } %> >Твердый</option>
+                                <option value="Мягкий" <% if(product.coverType === "Мягкий"){ %> selected <% } %> >Мягкий</option>
+                              </select>
+                        </div>
+                        <div class="col s6">
+                            <select name="publisher" required class="input-field">
+                                <option disabled selected>Выберите Издательство</option>
+                                <option value="Marvel" <% if(product.publisher === "Marvel"){ %> selected <% } %> >Marvel</option>
+                                <option value="DC" <% if(product.publisher === "DC"){ %> selected <% } %> >DC</option>
+                                <option value="Другое" <% if(product.publisher !== "DC" && product.publisher !== "Marvel"){ %> selected <% } %>>Другое</option>
+                              </select>
+                        </div>
+                    </div>
+                    <div class="input-field col m4 s12 ">
+                        <input required name="num_items" id="num_items" type="number" class="validate" min="0" value=<%= product.items.length %>>
+                        <label for="num_items">Количество</label>
+                    </div>
+                    <div class="row">
+                        <div class="input-field col s12">
+                            <textarea required name="description" id="description" type="text" class="input-field col s12"><%= product.description %></textarea>
+                            <label for="description">Описание</label>
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="input-field col s12">
+                            <input class="col s12 validate" id="pic1" name="pictures[0]" type="text" value=<%= product.pictures[0] %> required>
+                            <label for="pic1">Картинка 1</label>
+                        </div>
+                        <div class="input-field col s12 ">
+                            <input class="col s12" id="pic2" name="pictures[1]" type="text" value=<%= product.pictures[1] %> >
+                            <label for="pic2">Картинка 2</label>
+                        </div>
+                        <div class="input-field col s12">
+                            <input class="col s12" id="pic3" name="pictures[2]" type="text" value=<%= product.pictures[2] %> >
+                            <label for="pic3">Картинка 3</label>
+                        </div>
+                    </div>
+
+                    <div class="row col s12 btns">
+                            <button type="submit" class="col s5 btn darken-2 green">Сохранить</button>
+                            <a href="/adminProducts" type="reset" class="col s5 btn darken-2 red">Отмена</a>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </main>
+
+    <footer>
+        <%- include('../partials/footer'); %>
+    </footer>
+
+    <script>
+
+    </script>
+</body>
+
+</html>

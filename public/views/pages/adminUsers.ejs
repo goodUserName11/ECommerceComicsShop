@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <%- include('../partials/head'); %>
+
+    <link rel="stylesheet" type="text/css" href="/css/adminAddProduct.css"/>
+
+    <style>
+        .main {
+            margin: 0 auto;
+        }
+        .rows {
+            font-weight: 100;
+        }
+        /* .table-ordersCount{
+                text-align: right;
+                margin-right: 10px;
+            } */
+        .table-change:hover {
+            text-decoration: underline;
+        }
+        .table-change:active {
+            color: red;
+        }
+    </style>
+</head>
+
+<bodys>
+    <header>
+        <%- include('../partials/header'); %>
+    </header>
+
+    <main class="container">
+        <h5 class="text-center">Пользователи</h5>
+        <div class="row">
+            <table class="users highlight responsive-table">
+                <thead>
+                    <tr>
+                        <th>
+                            <p>Email</p>
+                        </th>
+                        <th>
+                            <p>Имя</p>
+                        </th>
+                        <th>
+                            <p>Фамилия</p>
+                        </th>
+                        <th>
+                            <p>Отчество</p>
+                        </th>
+                        <th>
+                            <p>Телефон</p>
+                        </th>
+                        <th>
+                            <p>Пол</p>
+                        </th>
+                        <th class="">
+                            <p>Кол-во заказов</p>
+                        </th>
+                        <th>
+                            <p>Админ?</p>
+                        </th>
+                        <th>
+                            <p>Изменить админство</p>
+                        </th>
+                    </tr>
+                </thead>
+                <% users.forEach(function(user){ %>
+                    <tr class="rows">
+                        <%- include('../partials/adminUsersTableRow.ejs', {user:user})%>
+                    </tr>
+                <% }); %>
+            </table>
+        </div>
+    </main>
+
+    <footer>
+        <%- include('../partials/footer'); %>
+    </footer>
+
+    <script>
+
+    </script>
+</body>
+
+</html>

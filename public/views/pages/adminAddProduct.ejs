@@ -9,6 +9,8 @@
     <style>
         .main{
             margin: 0 auto;
+            text-align: center;
+            margin: 0 auto;
         }
         .btns{
             text-align: center;
@@ -16,6 +18,14 @@
         }
         select{
             display: flex;
+        }
+        .pics{
+            /* margin: auto; */
+            justify-content: center;
+            align-self: center;
+            /* margin: auto; */
+            text-align: center;
+            padding: auto;
         }
     </style>
 </head>
@@ -29,47 +39,61 @@
         <div class="main">
             <h5 class="text-center">Добавить товар</h5>
             <div class="row">
-                <form class="col s12">
+                <form action="/product/create" method="post" class="col s12">
                     <div class="row">
                         <div class="input-field col s8">
-                            <input required minlength="3" id="name" type="text" class="validate">
+                            <input required name="title" minlength="3" id="name" type="text" class="validate">
                             <label for="name">Название</label>
                         </div>
                         <div class="input-field col s4">
-                            <input required id="price" type="text" class="validate">
+                            <input required name="price" id="price" type="number" min="1" class="validate" value="1">
                             <label for="price">Цена, руб.</label>
                         </div>
                         <div class="col s6">
-                            <select required class="input-field">
+                            <select name="coverType" required class="input-field">
                                 <option value="" disabled selected>Выберите тип переплета</option>
-                                <option value="solid">Твердый</option>
-                                <option value="soft">Мягкий</option>
+                                <option value="Твердый">Твердый</option>
+                                <option value="Мягкий">Мягкий</option>
                               </select>
                         </div>
                         <div class="col s6">
-                            <select required class="input-field">
+                            <select name="publisher" required class="input-field">
                                 <option value="" disabled selected>Выберите Издательство</option>
-                                <option value="marvel">Marvel</option>
-                                <option value="dc">DC</option>
-                                <option value="other">Другое</option>
+                                <option value="Marvel">Marvel</option>
+                                <option value="DC">DC</option>
+                                <option value="Другое">Другое</option>
                               </select>
                         </div>
                     </div>
+                    <div class="input-field col m4 s12 ">
+                        <input required name="num_items" id="num_items" type="number" min="0" class="validate" value="1">
+                        <label for="num_items">Количество</label>
+                    </div>
                     <div class="row">
                         <div class="input-field col s12">
-                            <textarea id="description" type="text" class="input-field col s12"></textarea>
+                            <textarea required name="description" id="description" type="text" class="input-field col s12 validate"></textarea>
                             <label for="description">Описание</label>
                         </div>
                     </div>
 
                     <div class="row">
-                        <input class="col s12" type="file" accept="image/*">
-
+                        <div class="input-field col s12">
+                            <input class="col s12 validate" id="pic1" name="pictures[0]" type="text" required>
+                            <label for="pic1">Картинка 1</label>
+                        </div>
+                        <div class="input-field col s12 ">
+                            <input class="col s12" id="pic2" name="pictures[1]" type="text">
+                            <label for="pic2">Картинка 2</label>
+                        </div>
+                        <div class="input-field col s12">
+                            <input class="col s12" id="pic3" name="pictures[2]" type="text">
+                            <label for="pic3">Картинка 3</label>
+                        </div>
                     </div>
 
                     <div class="row col s12 btns">
-                            <button class="col s5 btn darken-2 green">Создать</button>
-                            <button class="col s5 btn darken-2 red">Отмена</button>
+                            <button type="submit" class="col s5 btn darken-2 green">Сохранить</button>
+                            <a href="/adminProducts" type="reset" class="col s5 btn darken-2 red">Отмена</a>
                     </div>
                 </form>
             </div>
